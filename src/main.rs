@@ -1,7 +1,7 @@
-use clap::{Command, Arg};
-use std::fs::File;
+use clap::{Arg, Command};
 use std::env;
-use std::io::{self, BufReader, BufWriter, ErrorKind, Result, Read, Write};
+use std::fs::File;
+use std::io::{self, BufReader, BufWriter, ErrorKind, Read, Result, Write};
 
 const CHUNK_SIZE: usize = 16 * 1024;
 
@@ -15,9 +15,7 @@ fn main() -> Result<()> {
                 .takes_value(true)
                 .help("Write output to a file instead of stdout"),
         )
-        .arg(Arg::new("silent")
-            .short('s')
-            .long("silent"))
+        .arg(Arg::new("silent").short('s').long("silent"))
         .get_matches();
     let infile = matches.value_of("infile").unwrap_or_default();
     let outfile = matches.value_of("outfile").unwrap_or_default();
