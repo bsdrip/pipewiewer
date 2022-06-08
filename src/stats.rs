@@ -2,13 +2,12 @@
 //!
 //! # Header
 
-
 mod timer;
 
 use crossbeam::channel::Receiver;
 use crossterm::{
     cursor, execute,
-    style::{self, Color, PrintStyledContent, Stylize},
+    style::{self, Color, PrintStyledContent},
     terminal::{Clear, ClearType},
 };
 use std::io::{self, Result, Stderr, Write};
@@ -44,6 +43,7 @@ pub fn stats_loop(silent: bool, stats_rx: Receiver<usize>) -> Result<()> {
     Ok(())
 }
 
+#[allow(deprecated)]
 fn output_progress(stderr: &mut Stderr, bytes: usize, elapsed: String, rate: f64) {
     let bytes = style::style(format!("{} ", bytes)).with(Color::Red);
     let elapsed = style::style(elapsed).with(Color::Green);
