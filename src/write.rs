@@ -6,7 +6,7 @@ pub fn write_loop(outfile: &str, write_rx: Receiver<Vec<u8>>) -> Result<()> {
     let mut writer: Box<dyn Write> = if !outfile.is_empty() {
         Box::new(BufWriter::new(File::create(outfile)?))
     } else {
-        Box::new(io::stdout())
+        Box::new(BufWriter::new(io::stdout()))
     };
 
     loop {

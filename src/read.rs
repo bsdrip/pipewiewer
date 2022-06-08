@@ -7,7 +7,7 @@ pub fn read_loop(infile: &str, stats_tx: Sender<usize>, write_tx: Sender<Vec<u8>
     let mut reader: Box<dyn Read> = if !infile.is_empty() {
         Box::new(BufReader::new(File::open(infile)?))
     } else {
-        Box::new(io::stdin())
+        Box::new(BufReader::new(io::stdin()))
     };
     let mut buffer = [0; CHUNK_SIZE];
     loop {
